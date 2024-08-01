@@ -5,9 +5,9 @@ Este projeto é um exemplo básico de como gerar e baixar um PDF utilizando o La
 
 ## Pré-requisitos
 
-- PHP >= 7.3
+- PHP >= 8.2
 - Composer
-- Laravel >= 8.0
+- Laravel >= 10.0
 ## Instalação
 
 Clone o repositório:
