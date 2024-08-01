@@ -1,30 +1,41 @@
-Projeto de Teste de PDF com Laravel-Dompdf
+
+# gerador-pdf-dompdf
+
 Este projeto é um exemplo básico de como gerar e baixar um PDF utilizando o Laravel e a biblioteca Dompdf.
 
-Pré-requisitos
-PHP >= 7.3
-Composer
-Laravel >= 8.0
-Instalação
+## Pré-requisitos
+
+- PHP >= 7.3
+- Composer
+- Laravel >= 8.0
+## Instalação
+
 Clone o repositório:
 
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+```bash
+https://github.com/LuizKirsch/gerador-pdf-dompdf.git
+```
+Vá para a pasta do projeto:
+```bash
+cd gerador-pdf-dompdf
+```
 Instale as dependências do projeto:
-
+```bash
 composer install
+```
 Copie o arquivo .env.example para .env e configure seu banco de dados e outras variáveis de ambiente:
-
+```bash
 cp .env.example .env
 php artisan key:generate
-Instale o pacote barryvdh/laravel-dompdf:
+```
 
-composer require barryvdh/laravel-dompdf
-Uso
-Controlador
-O controlador TestePDFController contém o método download que gera o PDF a partir de uma view:
+## Uso
 
+Controller:
+
+```php
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -39,14 +50,15 @@ class TestePDFController extends Controller
             'date' => date('d/m/Y')
         ];
 
-        $pdf = Pdf::loadView('pdf', compact('data'));
+        $pdf = PDF::loadView('pdf', compact('data'));
         return $pdf->download('invoice.pdf');
     }
 }
 
-View
-A view pdf.blade.php é utilizada para definir o conteúdo e o layout do PDF:
+```
 
+View:
+```blade
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,21 +97,13 @@ A view pdf.blade.php é utilizada para definir o conteúdo e o layout do PDF:
     </div>
 </body>
 </html>
-Rota
-A rota para download do PDF é definida no arquivo web.php:
-
+```
+Rota:
+```php
 <?php
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestePDFController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+  use App\Http\Controllers\TestePDFController;
 
-Route::get('/download', [TestePDFController::class , 'download'])->name('download');
+  Route::get('/download', [TestePDFController::class , 'download'])->name('download');
+```
 
-Executando o Projeto
-Para iniciar o servidor de desenvolvimento do Laravel, utilize o seguinte comando:
-
-php artisan serve
-Acesse o projeto em seu navegador: http://localhost:8000. Para baixar o PDF gerado, acesse http://localhost:8000/download.
